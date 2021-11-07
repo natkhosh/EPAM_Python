@@ -1,3 +1,5 @@
+from typing import Sequence
+
 import pytest
 
 from homework1.task_2.task_2 import check_fibonacci
@@ -14,7 +16,7 @@ from homework1.task_2.task_2 import check_fibonacci
         ([377, 610, 987, 1597], True),
     ],
 )
-def test_check_fibonacci(value, expected_result: bool):
+def test_check_fibonacci(value: Sequence[int], expected_result: bool):
     """
     Testing that actual given sequence is a Fibonacci sequence
     """
