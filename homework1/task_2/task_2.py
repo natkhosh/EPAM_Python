@@ -1,7 +1,7 @@
 """
 Given a cell with "it's a fib sequence" from slideshow,
-    please write function "check_fib", which accepts a Sequence of integers, and
-    returns if the given sequence is a Fibonacci sequence
+please write function "check_fib", which accepts a Sequence of integers, and
+returns if the given sequence is a Fibonacci sequence
 
 We guarantee, that the given sequence contain >= 0 integers inside.
 """
@@ -22,8 +22,8 @@ def _check_window(x: int, y: int, z: int) -> bool:
 def check_fibonacci(data: Sequence[int]) -> bool:
     """
     Function for check a Fibonacci sequence.
-    :param data: Sequence[int]
-    :return: bool
+    :param data: Sequence of integers
+    :return: bool: true for success if the given sequence is a Fibonacci sequence, False otherwise.
     """
     if len(data) < 3:
         print("Invalid data")
