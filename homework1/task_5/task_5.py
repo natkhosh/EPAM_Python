@@ -29,6 +29,4 @@ def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
                 if subarray_sum > max_sum:
                     max_sum = subarray_sum
         return max_sum
-    else:
-        print("Argument Error: nums length must be >= 2, k must be >= 2")
-        return 0
+    return 0
