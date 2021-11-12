@@ -18,18 +18,15 @@ def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
     :return: maximal sum of sub-array
     """
     arr_len = len(nums)
-    # max_sum = 0
 
-    if not arr_len :
+    if not arr_len:
         return 0
 
     max_sum = max(nums)
-    if k == 1:
-        return max_sum
-    else:
-        for i in range(2, k + 1):
-            for j in range(arr_len):
-                subarray_sum = sum(nums[j : i + j])
-                if subarray_sum > max_sum:
-                    max_sum = subarray_sum
-        return max_sum
+
+    for i in range(1, k + 1):
+        for j in range(arr_len):
+            subarray_sum = sum(nums[j : i + j])
+            if subarray_sum > max_sum:
+                max_sum = subarray_sum
+    return max_sum
