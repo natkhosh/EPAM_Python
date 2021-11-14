@@ -46,7 +46,9 @@ def get_rarest_char(file_path: str) -> str:
                     symbols_counter[symbol] = 1
                 else:
                     symbols_counter[symbol] += 1
-    return min(symbols_counter, key=lambda dict_key: symbols_counter[dict_key])
+
+    rarest_chars = [k for (k, v) in symbols_counter.items() if v == 1]
+    return "".join(rarest_chars)
 
 
 def count_punctuation_chars(file_path: str) -> int:
@@ -98,16 +100,3 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
                     else:
                         symbols_counter[symbol] += 1
     return max(symbols_counter, key=lambda dict_key: symbols_counter[dict_key])
-
-
-# print(get_most_common_non_ascii_char("../task_1/data.txt"))
-
-
-# 1.2 Список всех самых редких символ для документа
-# sorted_tuples = sorted(symbols_counter.items(), key=lambda item: item[1])
-# print(sorted_tuples)
-# r = []
-# for k, v in symbols_counter.items():
-#     if v == 1:
-#         r.append(k)
-# q = ''.join(r)

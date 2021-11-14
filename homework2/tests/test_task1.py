@@ -49,7 +49,10 @@ def test_get_longest_diverse_words(file_path: str, expected_result: List[str]):
 
 @pytest.mark.parametrize(
     "file_path, expected_result",
-    [("homework2/task_1/data.txt", "›"), ("homework2/task_1/data1.txt", "W")],
+    [
+        ("homework2/task_1/data.txt", "›‹Yî’X()"),
+        ("homework2/task_1/data1.txt", "W—IyTLAPGzBw"),
+    ],
 )
 def test_get_rarest_char(file_path: str, expected_result: str):
     """
