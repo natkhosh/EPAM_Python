@@ -100,7 +100,7 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
     return max(symbols_counter, key=lambda dict_key: symbols_counter[dict_key])
 
 
-# print(get_longest_diverse_words("../task_1/data1.txt"))
+# print(get_most_common_non_ascii_char("../task_1/data.txt"))
 
 
 # 1.2 Список всех самых редких символ для документа
