@@ -20,12 +20,9 @@ from typing import Any, List
 
 def combinations(*args: List[Any]) -> List[List]:
     """
-
-    :param args:
-    :return:
+    Function takes K lists as arguments and returns all possible lists of K items,
+    where the first element is from the first list, the second is from the second and so one.
+    :param args: lists of any elements as arguments
+    :return: list of all possible combinations of items from function's arguments.
     """
-
     return [list(row) for row in itertools.product(*args)]
-
-
-# print(combinations([1, 2], [3, "a", 5], ["e", "f"]))

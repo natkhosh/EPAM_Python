@@ -26,6 +26,6 @@ from homework2.task_3.task_3 import *
 )
 def test_combinations(value: Tuple[List], expected_result: List[List]):
     """
-    Testing that function actual finds he most common and the least common elements.
+    Testing that function actual returns all possible combinations of items from function's arguments.
     """
     assert combinations(*value) == expected_result
