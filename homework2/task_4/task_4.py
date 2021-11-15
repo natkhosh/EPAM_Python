@@ -29,10 +29,8 @@ def cache(func: Callable) -> Callable:
     cache_dict = {}
 
     def mem_func(*args):
-        if args in cache_dict:
-            return cache_dict[args]
-        else:
+        if args not in cache_dict:
             cache_dict[args] = func(*args)
-            return cache_dict[args]
+        return cache_dict[args]
 
     return mem_func
