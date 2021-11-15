@@ -28,10 +28,7 @@ def custom_range(iterable: Iterable, *args) -> List[Any]:
     :param step: Optional — an element that specifies how much to increment the element (Default value is 1)
     :return: List of values depend on recieved arguments
     """
-    if isinstance(iterable, dict):
-        iterable_arr = [k for (k, v) in iterable.items()]
-    else:
-        iterable_arr = iterable
+    iterable_arr = [k for (k, v) in iterable.items()] if isinstance(iterable, dict) else iterable
 
     result = []
 
