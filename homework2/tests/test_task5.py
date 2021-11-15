@@ -18,7 +18,7 @@ def test_custom_range_arg1(value: Iterable, stop, expected_result: List[Any]):
 
 
 @pytest.mark.parametrize(
-    "value, start, end, expected_result",
+    "value, start, stop, expected_result",
     [
         (
             string.ascii_lowercase,
@@ -30,12 +30,12 @@ def test_custom_range_arg1(value: Iterable, stop, expected_result: List[Any]):
         ({0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36}, 2, 6, [2, 3, 4, 5]),
     ],
 )
-def test_custom_range_arg2(value: Iterable, start, end, expected_result: List[Any]):
-    assert custom_range(value, start, end) == expected_result
+def test_custom_range_arg2(value: Iterable, start, stop, expected_result: List[Any]):
+    assert custom_range(value, start, stop) == expected_result
 
 
 @pytest.mark.parametrize(
-    "value, start, end, step, expected_result",
+    "value, start, stop, step, expected_result",
     [
         (string.ascii_lowercase, "p", "g", -2, ["p", "n", "l", "j", "h"]),
         ([66.25, -1, 333, 1, 1234.5, 337], 337, 1, -1, [337, 1234.5]),
@@ -43,13 +43,13 @@ def test_custom_range_arg2(value: Iterable, start, end, expected_result: List[An
     ],
 )
 def test_custom_range_arg3(
-    value: Iterable, start, end, step, expected_result: List[Any]
+    value: Iterable, start, stop, step, expected_result: List[Any]
 ):
     assert (
         custom_range(
             value,
             start,
-            end,
+            stop,
             step,
         )
         == expected_result
@@ -57,7 +57,7 @@ def test_custom_range_arg3(
 
 
 @pytest.mark.parametrize(
-    "value, start, end, step, arg4, expected_result",
+    "value, start, stop, step, arg4, expected_result",
     [
         (string.ascii_lowercase, "p", "g", -2, 4, True),
         ([66.25, -1, 333, 1, 1234.5, 337], 337, 1, -1, 4, True),
@@ -65,10 +65,10 @@ def test_custom_range_arg3(
     ],
 )
 def test_custom_range__arg4(
-    value: Iterable, start, end, step, arg4, expected_result: bool
+    value: Iterable, start, stop, step, arg4, expected_result: bool
 ):
 
     try:
-        custom_range(value, start, end, step, arg4)
+        custom_range(value, start, stop, step, arg4)
     except Exception:
         assert expected_result
