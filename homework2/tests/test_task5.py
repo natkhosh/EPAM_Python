@@ -1,4 +1,3 @@
-import string
 from typing import Any, Iterable, List
 
 import pytest
@@ -14,7 +13,7 @@ from homework2.task_5.task_5 import *
         ({0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36}, 6, [0, 1, 2, 3, 4, 5]),
     ],
 )
-def test_custom_range(value: Iterable, stop, expected_result: List[Any]):
+def test_custom_range_arg1(value: Iterable, stop, expected_result: List[Any]):
     assert custom_range(value, stop) == expected_result
 
 
@@ -31,7 +30,7 @@ def test_custom_range(value: Iterable, stop, expected_result: List[Any]):
         ({0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36}, 2, 6, [2, 3, 4, 5]),
     ],
 )
-def test_custom_range(value: Iterable, start, end, expected_result: List[Any]):
+def test_custom_range_arg2(value: Iterable, start, end, expected_result: List[Any]):
     assert custom_range(value, start, end) == expected_result
 
 
@@ -43,7 +42,9 @@ def test_custom_range(value: Iterable, start, end, expected_result: List[Any]):
         ({0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36}, 6, 2, -2, [6, 4]),
     ],
 )
-def test_custom_range(value: Iterable, start, end, step, expected_result: List[Any]):
+def test_custom_range_arg3(
+    value: Iterable, start, end, step, expected_result: List[Any]
+):
     assert (
         custom_range(
             value,
@@ -53,3 +54,21 @@ def test_custom_range(value: Iterable, start, end, step, expected_result: List[A
         )
         == expected_result
     )
+
+
+@pytest.mark.parametrize(
+    "value, start, end, step, arg4, expected_result",
+    [
+        (string.ascii_lowercase, "p", "g", -2, 4, True),
+        ([66.25, -1, 333, 1, 1234.5, 337], 337, 1, -1, 4, True),
+        ({0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36}, 6, 2, -2, 4, True),
+    ],
+)
+def test_custom_range__arg4(
+    value: Iterable, start, end, step, arg4, expected_result: bool
+):
+
+    try:
+        custom_range(value, start, end, step, arg4)
+    except Exception:
+        assert expected_result
