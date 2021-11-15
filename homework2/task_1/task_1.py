@@ -6,6 +6,8 @@ Given a file containing text. Complete using only default collections:
     4) Count every non ascii char
     5) Find most common non ascii char for document
 """
+import string
+from collections import Counter
 from typing import List
 
 
@@ -47,7 +49,11 @@ def get_rarest_char(file_path: str) -> str:
                 else:
                     symbols_counter[symbol] += 1
 
-    rarest_chars = [k for (k, v) in symbols_counter.items() if v == 1]
+    min_dict_key = min(symbols_counter, key=symbols_counter.get)
+    rarest_chars = [
+        k for (k, v) in symbols_counter.items() if v == symbols_counter[min_dict_key]
+    ]
+
     return "".join(rarest_chars)
 
 
@@ -57,10 +63,9 @@ def count_punctuation_chars(file_path: str) -> int:
     :param file_path: path to file
     :return: integer amount punctuation char
     """
-    punctuation_chars = "!\"#$%&'()*+,—-./:;<=>?@[\\]^_`{|}~"
+    punctuation_chars = string.punctuation + "—"
     amount = 0
     with open(file_path, encoding="unicode-escape") as file:
-        # print(file.read())
         for line in file:
             for symbol in line:
                 if symbol in punctuation_chars:
@@ -79,7 +84,6 @@ def count_non_ascii_chars(file_path: str) -> int:
         for line in file:
             for symbol in line:
                 if not symbol.isascii():
-                    # print(symbol)
                     amount += 1
     return amount
 
@@ -90,7 +94,7 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
     :param file_path: path to file
     :return: str: most common non ascii char for document
     """
-    symbols_counter = {}
+    symbols_counter = Counter()
     with open(file_path, encoding="unicode-escape") as file:
         for line in file:
             for symbol in line:
@@ -99,4 +103,4 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
                         symbols_counter[symbol] = 1
                     else:
                         symbols_counter[symbol] += 1
-    return max(symbols_counter, key=lambda dict_key: symbols_counter[dict_key])
+    return symbols_counter.most_common(1)[0][0]

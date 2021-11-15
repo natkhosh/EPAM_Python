@@ -70,5 +70,5 @@ def test_custom_range__arg4(
 
     try:
         custom_range(value, start, stop, step, arg4)
-    except Exception:
+    except TypeError:
         assert expected_result
