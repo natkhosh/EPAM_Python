@@ -19,14 +19,14 @@ def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
     """
     arr_len = len(nums)
 
-    if arr_len > 1 and 1 < k <= arr_len:
-        max_sum = nums[0]
+    if not arr_len:
+        return 0
 
-        for i in range(0, arr_len - k + 1):
-            for j in range(2, k + 1):
-                # Sum definition, the aggregate of two or more numbers
-                subarray_sum = sum(nums[i : i + j])
-                if subarray_sum > max_sum:
-                    max_sum = subarray_sum
-        return max_sum
-    return 0
+    max_sum = max(nums)
+
+    for i in range(1, k + 1):
+        for j in range(arr_len):
+            subarray_sum = sum(nums[j : i + j])
+            if subarray_sum > max_sum:
+                max_sum = subarray_sum
+    return max_sum
