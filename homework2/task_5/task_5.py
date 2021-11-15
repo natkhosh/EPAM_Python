@@ -47,5 +47,5 @@ def custom_range(iterable: Iterable, *args) -> List[Any]:
         ):
             result.append(iterable_arr[i])
     else:
-        raise Exception("Too many arguments for range function")
+        raise TypeError("Too many arguments for range function")
     return result
