@@ -37,7 +37,8 @@ def check_fibonacci(data: Sequence[int]) -> bool:
     """
     if len(data) < 2:
         return False
-    elif len(data) < 3:
+
+    if len(data) < 3:
         for i in range(1, len(data)):
             if not (
                 (data[i - 1] <= data[i])
@@ -47,10 +48,10 @@ def check_fibonacci(data: Sequence[int]) -> bool:
             ):
                 return False
         return True
-    else:
-        if (data[0] < data[1]) and isFibonacci(data[0]) and isFibonacci(data[1]):
-            for i in range(2, len(data)):
-                if data[i] != data[i - 1] + data[i - 2]:
-                    return False
-            return True
-        return False
+
+    if (data[0] < data[1]) and isFibonacci(data[0]) and isFibonacci(data[1]):
+        for i in range(2, len(data)):
+            if data[i] != data[i - 1] + data[i - 2]:
+                return False
+        return True
+    return False
