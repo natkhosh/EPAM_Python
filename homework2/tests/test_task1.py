@@ -42,7 +42,8 @@ from homework2.task_1.task_1 import *
 )
 def test_get_longest_diverse_words(file_path: str, expected_result: List[str]):
     """
-    Testing that function actual finds 10 longest words consisting from largest amount of unique symbols.
+    Testing that function actual finds 10 longest words consisting from
+    largest amount of unique symbols.
     """
     assert get_longest_diverse_words(file_path) == expected_result
 
@@ -56,7 +57,7 @@ def test_get_longest_diverse_words(file_path: str, expected_result: List[str]):
 )
 def test_get_rarest_char(file_path: str, expected_result: str):
     """
-    Testing that function actual finds 10 longest words consisting from largest amount of unique symbols.
+    Testing that function actual finds rarest symbol for document.
     """
     assert get_rarest_char(file_path) == expected_result
 
@@ -89,6 +90,6 @@ def test_count_non_ascii_chars(file_path: str, expected_result: int):
 )
 def test_get_most_common_non_ascii_char(file_path: str, expected_result: str):
     """
-    Testing that function actual count every non ascii char.
+    Testing that function actual count most common non ascii char for document.
     """
     assert get_most_common_non_ascii_char(file_path) == expected_result

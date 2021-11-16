@@ -17,6 +17,7 @@ from homework2.task_2.task_2 import *
 )
 def test_gmajor_and_minor_elem(value: List, expected_result: Tuple[int, int]):
     """
-    Testing that function actual finds he most common and the least common elements.
+    Testing that function actual finds he most common and the least common
+    elements.
     """
     assert major_and_minor_elem(value) == expected_result
