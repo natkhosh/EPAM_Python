@@ -1,3 +1,3 @@
 import pytest
 
-from homework3.task_3.task_3 import *
+import homework3.task_3.task_3
