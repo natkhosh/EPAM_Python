@@ -13,7 +13,8 @@ from typing import List
 
 def get_longest_diverse_words(file_path: str) -> List[str]:
     """
-    Function reads file and finds 10 longest words consisting from largest amount of unique symbols
+    Function reads file and finds 10 longest words consisting from largest
+    amount of unique symbols
     :param file_path: path to file
     :return: list of 10 longest words
     """
@@ -30,7 +31,9 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
                 words_counter[word] = len(set(word))
 
     return sorted(
-        words_counter, key=lambda dict_key: words_counter[dict_key], reverse=True
+        words_counter,
+        key=lambda dict_key: words_counter[dict_key],
+        reverse=True
     )[:10]
 
 
@@ -51,7 +54,8 @@ def get_rarest_char(file_path: str) -> str:
 
     min_dict_key = min(symbols_counter, key=symbols_counter.get)
     rarest_chars = [
-        k for (k, v) in symbols_counter.items() if v == symbols_counter[min_dict_key]
+        k for (k, v) in symbols_counter.items()
+        if v == symbols_counter[min_dict_key]
     ]
 
     return "".join(rarest_chars)

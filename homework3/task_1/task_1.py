@@ -50,7 +50,7 @@ def cache(times: int) -> Callable:
         cache_dict = {}
 
         def wrapper(*args):
-            nonlocal counter, cache_dict
+            nonlocal counter
 
             if counter == times:
                 cache_dict.pop(args, None)

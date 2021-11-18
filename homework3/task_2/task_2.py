@@ -14,8 +14,8 @@ important::
         return sum(struct.unpack('<' + 'B' * len(data), data))
 
 Calculate total sum of slow_calculate() of all numbers starting from 0 to 500.
-Calculation time should not take more than a minute. Use functional capabilities
-of multiprocessing module.
+Calculation time should not take more than a minute. Use functional
+capabilities of multiprocessing module.
 You are not allowed to modify slow_calculate function.
 
 """

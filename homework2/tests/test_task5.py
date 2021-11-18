@@ -1,8 +1,9 @@
+import string
 from typing import Any, Iterable, List
 
 import pytest
 
-from homework2.task_5.task_5 import *
+from homework2.task_5.task_5 import custom_range
 
 
 @pytest.mark.parametrize(
@@ -30,7 +31,8 @@ def test_custom_range_arg1(value: Iterable, stop, expected_result: List[Any]):
         ({0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36}, 2, 6, [2, 3, 4, 5]),
     ],
 )
-def test_custom_range_arg2(value: Iterable, start, stop, expected_result: List[Any]):
+def test_custom_range_arg2(value: Iterable, start, stop,
+                           expected_result: List[Any]):
     assert custom_range(value, start, stop) == expected_result
 
 

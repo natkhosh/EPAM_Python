@@ -9,26 +9,32 @@ it behaves as range function:
 import string
 
 
-assert = custom_range(string.ascii_lowercase, 'g') == ['a', 'b', 'c', 'd', 'e', 'f']
-assert = custom_range(string.ascii_lowercase, 'g', 'p') == ['g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o']
-assert = custom_range(string.ascii_lowercase, 'p', 'g', -2) == ['p', 'n', 'l', 'j', 'h']
+assert = custom_range(string.ascii_lowercase, 'g')
+        == ['a', 'b', 'c', 'd', 'e', 'f']
+assert = custom_range(string.ascii_lowercase, 'g', 'p')
+        == ['g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o']
+assert = custom_range(string.ascii_lowercase, 'p', 'g', -2)
+        == ['p', 'n', 'l', 'j', 'h']
 
 """
-import string
 from typing import Any, Iterable, List
 
 
 def custom_range(iterable: Iterable, *args) -> List[Any]:
     """
-    Function accepts iterable of unique values, start index, end index and step
-    and behaves behaves as range function.
+    Function accepts iterable of unique values, start index,
+    end index and step and behaves behaves as range function.
     :param iterable: any iterable of unique values
-    :param start: Optional - it is the starting position of the sequence (Lower limit)
-    :param stop: Required — an element that specifies where to stop (Upper limit)
-    :param step: Optional — an element that specifies how much to increment the element (Default value is 1)
+    :param start: Optional - it is the starting position of the sequence
+    (Lower limit)
+    :param stop: Required — an element that specifies where to stop
+    (Upper limit)
+    :param step: Optional — an element that specifies how much to increment
+    the element (Default value is 1)
     :return: List of values depend on recieved arguments
     """
-    iterable_arr = [k for (k, v) in iterable.items()] if isinstance(iterable, dict) else iterable
+    iterable_arr = [k for (k, v) in iterable.items()] \
+        if isinstance(iterable, dict) else iterable
 
     result = []
 

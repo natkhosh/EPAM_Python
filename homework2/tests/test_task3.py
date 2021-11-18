@@ -2,7 +2,7 @@ from typing import List, Tuple
 
 import pytest
 
-from homework2.task_3.task_3 import *
+from homework2.task_3.task_3 import combinations
 
 
 @pytest.mark.parametrize(
@@ -26,6 +26,7 @@ from homework2.task_3.task_3 import *
 )
 def test_combinations(value: Tuple[List], expected_result: List[List]):
     """
-    Testing that function actual returns all possible combinations of items from function's arguments.
+    Testing that function actual returns all possible combinations of items
+    from function's arguments.
     """
     assert combinations(*value) == expected_result
