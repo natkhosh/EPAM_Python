@@ -2,7 +2,7 @@ from typing import List, Tuple
 
 import pytest
 
-from homework2.task_2.task_2 import *
+from homework2.task_2.task_2 import major_and_minor_elem
 
 
 @pytest.mark.parametrize(

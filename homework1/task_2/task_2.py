@@ -22,7 +22,8 @@ def isPerfectSquare(x: int) -> bool:
 def isFibonacci(n: int) -> bool:
     """
     Function checking if a number is Fibonacci.
-    n is Fibonacci if one of 5*n*n + 4 or 5*n*n - 4 or both is a perferct square.
+    n is Fibonacci if one of 5*n*n + 4 or 5*n*n - 4 or both is
+    a perferct square.
     :param n: integer number to check
     :return: bool:Returns true if n is a Fibonacci Number, else false
     """
@@ -33,7 +34,8 @@ def check_fibonacci(data: Sequence[int]) -> bool:
     """
     Function for check a Fibonacci sequence.
     :param data: Sequence of integers
-    :return: bool: true for success if the given sequence is a Fibonacci sequence, False otherwise.
+    :return: bool: true for success if the given sequence is a Fibonacci
+    sequence, False otherwise.
     """
     if len(data) < 2:
         return False

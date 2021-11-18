@@ -22,6 +22,7 @@ def test_find_maximal_subarray_sum(
     value: List[int], subarray_len: int, expected_result: int
 ):
     """
-    Testing that function finds a sub-array with length less then or equal to "k", with maximal sum.
+    Testing that function finds a sub-array with length less then or equal
+    to "k", with maximal sum.
     """
     assert find_maximal_subarray_sum(value, subarray_len) == expected_result

@@ -14,9 +14,14 @@ from homework1.task_4.task_4 import check_sum_of_four
     ],
 )
 def test_check_sum_of_four(
-    a: List[int], b: List[int], c: List[int], d: List[int], expected_result: int
+    a: List[int],
+        b: List[int],
+        c: List[int],
+        d: List[int],
+        expected_result: int
 ):
     """
-    Testing that function computes how many tuples (i, j, k, l) there are such that A[i] + B[j] + C[k] + D[l] is zero.
+    Testing that function computes how many tuples (i, j, k, l)
+    there are such that A[i] + B[j] + C[k] + D[l] is zero.
     """
     assert check_sum_of_four(a, b, c, d) == expected_result

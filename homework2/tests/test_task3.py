@@ -2,7 +2,7 @@ from typing import List, Tuple
 
 import pytest
 
-from homework2.task_3.task_3 import *
+from homework2.task_3.task_3 import combinations
 
 
 @pytest.mark.parametrize(

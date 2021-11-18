@@ -2,7 +2,7 @@ from typing import Callable, Tuple
 
 import pytest
 
-from homework2.task_4.task_4 import *
+from homework2.task_4.task_4 import cache
 
 
 @pytest.mark.parametrize(
@@ -12,7 +12,9 @@ from homework2.task_4.task_4 import *
         ((1, 2, 3), (lambda a, b, c: (a + b) * c), True),
     ],
 )
-def test_cache(test_input: Tuple[int], some_func: Callable, expected_result: bool):
+def test_cache(test_input: Tuple[int],
+               some_func: Callable,
+               expected_result: bool):
     """
     Testing that call to function was cached.
     """
