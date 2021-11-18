@@ -32,4 +32,6 @@ sample_data = [
 def test_make_filter(
     kwargs, some_data: List[Any], expected_result: List[Any]
 ):
+    """
+    """
     assert make_filter(**kwargs).apply(some_data) == expected_result
