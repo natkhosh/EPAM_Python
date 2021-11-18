@@ -38,6 +38,5 @@ def is_armstrong(number: int) -> bool:
     if sum(check) == number:
         print('Is Armstrong number')
         return True
-    else:
-        print('Is not Armstrong number')
-        return False
+    print('Is not Armstrong number')
+    return False
