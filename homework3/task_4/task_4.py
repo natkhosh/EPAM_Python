@@ -16,13 +16,28 @@ in functionaly style:
  - use anonymous functions (or use function as argument)
  - do not use loops, preferably using list comprehensions
 
+
 ### Example function signature and call
+
+        assert is_armstrong(153) is True, 'Is Armstrong number'
+        assert is_armstrong(10) is False, 'Is not Armstrong number'
+
 """
 
 
 def is_armstrong(number: int) -> bool:
-    ...
-
-
-assert is_armstrong(153) is True, "Is Armstrong number"
-assert is_armstrong(10) is False, "Is not Armstrong number"
+    """
+    Function detects if a number is Armstrong number
+    :param number: integer
+    :return: bool: true for success if the given number is Armstrong number,
+    False otherwise.
+    """
+    number_to_numeric = str(number)
+    check = list(map(lambda x: int(x) ** len(number_to_numeric),
+                     number_to_numeric))
+    if sum(check) == number:
+        print('Is Armstrong number')
+        return True
+    else:
+        print('Is not Armstrong number')
+        return False
