@@ -95,6 +95,6 @@ def test_count_non_ascii_chars(file_path: str, expected_result: int):
 )
 def test_get_most_common_non_ascii_char(file_path: str, expected_result: str):
     """
-    Testing that function actual count every non ascii char.
+    Testing that function actual count most common non ascii char for document.
     """
     assert get_most_common_non_ascii_char(file_path) == expected_result
