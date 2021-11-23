@@ -40,17 +40,15 @@ def fizzbuzz(n: int) -> List[str]:
     >>> fizzbuzz(0)
     Traceback (most recent call last):
     ...
-    ValueError: n must be not less than 1
+    ValueError: n must be integer and not less than 1
     >>> fizzbuzz(1.5)
     Traceback (most recent call last):
     ...
-    ValueError: n must be integer
+    ValueError: n must be integer and not less than 1
 
     """
-    if n < 1:
-        raise ValueError("n must be not less than 1")
-    if isinstance(n, float):
-        raise ValueError("n must be integer")
+    if not isinstance(n, int) or n < 1:
+        raise ValueError("n must be integer and not less than 1")
 
     result = []
     for number in range(1, n + 1):
