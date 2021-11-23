@@ -6,9 +6,16 @@ from homework4.task_1.task_1 import read_magic_number
 
 
 @pytest.fixture()
-def file_generator(file_pass, value):
-    with open(file_pass, "w") as fi:
-        fi.write(value)
+def file_generator(file_pass: str, value: str):
+    """
+    Function create files required for the testing and remove them after
+    the test run.
+    :param file_pass: generated file name
+    :param value: str, file content
+    :return: iterator
+    """
+    with open(file_pass, "w") as file:
+        file.write(value)
     yield file_pass
     os.remove(file_pass)
 
