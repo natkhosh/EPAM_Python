@@ -35,6 +35,9 @@ def fizzbuzz(n: int) -> List[str]:
 
     >>> fizzbuzz(5)
     ['1', '2', 'fizz', '4', 'buzz']
+    >>> fizzbuzz(15)
+    ['1', '2', 'fizz', '4', 'buzz', 'fizz', '7', '8', 'fizz', 'buzz', '11', \
+'fizz', '13', '14', 'fizzbuzz']
     >>> fizzbuzz(1)
     ['1']
     >>> fizzbuzz(0)
@@ -52,12 +55,12 @@ def fizzbuzz(n: int) -> List[str]:
 
     result = []
     for number in range(1, n + 1):
-        if number % 3 == 0:
+        if number % 15 == 0:
+            result.append("fizzbuzz")
+        elif number % 3 == 0:
             result.append("fizz")
         elif number % 5 == 0:
             result.append("buzz")
-        elif number % 15 == 0:
-            result.append("fizz buzz")
         else:
             result.append(str(number))
     return result
