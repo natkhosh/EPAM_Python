@@ -14,7 +14,6 @@ You will learn:
  - how to write doctests
  - how to run doctests
 
-
 assert fizzbuzz(5) == ["1", "2", "fizz", "4", "buzz"]
 
 * https://en.wikipedia.org/wiki/Fizz_buzz
