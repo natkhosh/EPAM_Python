@@ -57,7 +57,7 @@ def fizzbuzz(n: int) -> List[str]:
         elif number % 5 == 0:
             result.append("buzz")
         elif number % 15 == 0:
-            result.append("fizz buzz")
+            result.append("fizzbuzz")
         else:
             result.append(str(number))
     return result
