@@ -7,6 +7,9 @@ from homework5.task_1.task_1 import Homework, Student, Teacher
 
 
 class TestData(NamedTuple):
+    """
+    A utility class for creating test data structure
+    """
     teacher: Teacher
     student: Student
     expired_homework: Homework
@@ -15,7 +18,9 @@ class TestData(NamedTuple):
 
 @pytest.fixture
 def test_data():
-    """Creating class instances for running the tests"""
+    """
+    Creating class instances for running the tests
+    """
     teacher = Teacher('Shadrin', 'Daniil')
     student = Student('Petrov', 'Roman')
     expired_homework = teacher.create_homework('Learn functions', 0)
@@ -24,19 +29,25 @@ def test_data():
 
 
 def test_teacher_attributes(test_data):
-    """Testing that the attributes of a class Teacher are correct"""
+    """
+    Testing that the attributes of a class Teacher are correct
+    """
     assert test_data.teacher.last_name == 'Shadrin'
     assert test_data.teacher.first_name == 'Daniil'
 
 
 def test_student_attributes(test_data):
-    """Testing that the attributes of a class Student are correct"""
+    """
+    Testing that the attributes of a class Student are correct
+    """
     assert test_data.student.last_name == 'Petrov'
     assert test_data.student.first_name == 'Roman'
 
 
 def test_homework_attributes(test_data):
-    """Testing that the attributes of a class Homework are correct"""
+    """
+    Testing that the attributes of a class Homework are correct
+    """
     assert test_data.expired_homework.deadline == timedelta(0)
     assert test_data.expired_homework.text == 'Learn functions'
 
