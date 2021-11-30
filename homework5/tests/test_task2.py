@@ -5,8 +5,8 @@ from homework5.task_2.task_2 import custom_sum
 
 def test_save_info():
     """
-    Testing that decorator saves the docstring from and the name an
-    original function
+    Testing that decorator saves the docstring and the name from an original
+    function
     """
     assert custom_sum.__doc__ == "This function can sum any objects which " \
                                  "have __add___"

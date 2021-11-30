@@ -30,8 +30,9 @@ def save_func_info(func):
     """
     def wrapper_2(print_result_wrapper):
         """
-        Saves attributes __name__ and __doc__ of received function (func),
-        saves this func in the attribute __original_func of the wrapper.
+        Function-wrapper saves attributes __name__ and __doc__ of received
+        function (func), saves this func in the attribute __original_func of
+        the wrapper.
         :param print_result_wrapper: decorated wrapper function
         :return: wrapper function with saved attributes
         """
