@@ -53,8 +53,10 @@ def test_homework_attributes(test_data):
 
 
 def test_student_do_homework_method_expired(test_data, capsys):
-    """Testing that class Student method 'do_homework' returns a correct result
-    with an expired instance of a Homework class"""
+    """
+    Testing that class Student method 'do_homework' returns a correct result
+    with an expired instance of a Homework class
+    """
     test_data.student.do_homework(test_data.expired_homework)
     captured = capsys.readouterr()
     assert captured.out.strip() == 'You are late'
