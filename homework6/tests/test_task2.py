@@ -127,8 +127,8 @@ def test_student_homework_deadline_exception(test_data):
         test_data.lazy_student.do_homework(test_data.expired_homework, 'done')
 
 
-# def test_student_homework_result_wrong_object_exception(test_data):
-#     """Testing that TypeError with a message 'You gave not a Homework object'
-#     is raised if homework parameter is not an instance of a class Homework"""
-#     with pytest.raises(TypeError, match='You gave a not Homework object'):
-#        HomeworkResult(test_data.good_student, "fff", "Solution")
+def test_student_homework_result_wrong_object_exception(test_data):
+    """Testing that TypeError with a message 'You gave not a Homework object'
+    is raised if homework parameter is not an instance of a class Homework"""
+    with pytest.raises(TypeError, match='You gave a not Homework object'):
+        HomeworkResult(test_data.good_student, "fff", "Solution")
