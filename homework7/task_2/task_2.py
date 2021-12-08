@@ -34,7 +34,7 @@ def str_parser(string: str):
 
 def backspace_compare(first: str, second: str):
     """
-    Function comperes strings
+    Function compares strings
     :param first: string
     :param second: string
     :return: if equal returns True, otherwise False
