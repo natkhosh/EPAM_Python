@@ -13,9 +13,10 @@ Examples:
     Output: False
     Explanation: s becomes "c" while t becomes "b".
 """
+from typing import List
 
 
-def str_parser(string: str):
+def str_parser(string: str) -> List:
     """
     Function formats string into list of chars and removes backspace
     characters (#) and element before them.
@@ -32,7 +33,7 @@ def str_parser(string: str):
     return list_of_chars
 
 
-def backspace_compare(first: str, second: str):
+def backspace_compare(first: str, second: str) -> bool:
     """
     Function compares strings
     :param first: string
