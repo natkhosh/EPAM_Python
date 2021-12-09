@@ -13,10 +13,10 @@ Examples:
     Output: False
     Explanation: s becomes "c" while t becomes "b".
 """
-from typing import List
+from typing import Generator
 
 
-def str_parser(string: str) -> List:
+def str_parser(string: str) -> Generator[str, None, None]:
     """
     Function formats string into list of chars and removes backspace
     characters (#) and element before them.
