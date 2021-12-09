@@ -30,4 +30,4 @@ def my_precious_logger(text: str):
     "error" and to the stdout otherwise.
     :param text: string
     """
-        print(text, file=sys.stderr) if text.startswith('error') else print(text)
+    print(text, file=sys.stderr) if text.startswith('error') else print(text)

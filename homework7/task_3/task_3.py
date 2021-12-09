@@ -39,7 +39,7 @@ def tic_tac_toe_checker(board: List[List]) -> str:
         if board[0][i] == board[1][i] == board[2][i] != "-":
             return f"{board[1][i]} wins!"
 
-    for element in board:
-        if "-" in element:
+    for row in board:
+        if "-" in row:
             return "unfinished!"
         return "draw!"

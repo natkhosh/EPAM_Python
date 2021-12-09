@@ -23,14 +23,16 @@ def str_parser(string: str) -> List:
     :param string: string
     :return: list of chars
     """
-    list_of_chars = []
-    for char in string:
-        if char != '#':
-            list_of_chars.append(char)
+    sharp = 0
+    for char in string[::-1]:
+        if char == '#':
+            sharp += 1
+            continue
         else:
-            if len(list_of_chars) > 0:
-                list_of_chars.pop(-1)
-    return list_of_chars
+            if sharp == 0:
+                yield char
+            else:
+                sharp -= 1
 
 
 def backspace_compare(first: str, second: str) -> bool:
@@ -40,7 +42,6 @@ def backspace_compare(first: str, second: str) -> bool:
     :param second: string
     :return: if equal returns True, otherwise False
     """
-    return True if str_parser(first) == str_parser(second) else False
-
-
-print(backspace_compare("a#c", "b"))
+    first_ = [i for i in str_parser(first)]
+    second_ = [i for i in str_parser(second)]
+    return True if first_ == second_ else False
