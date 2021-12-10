@@ -28,11 +28,11 @@ def str_parser(string: str) -> Generator[str, None, None]:
         if char == '#':
             sharp += 1
             continue
+
+        if sharp == 0:
+            yield char
         else:
-            if sharp == 0:
-                yield char
-            else:
-                sharp -= 1
+            sharp -= 1
 
 
 def backspace_compare(first: str, second: str) -> bool:

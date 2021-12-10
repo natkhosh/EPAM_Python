@@ -28,6 +28,5 @@ def find_occurrences(tree: dict, element: Any) -> int:
             counter += 1
         if isinstance(value, (str, bool, int, set, tuple)):
             continue
-        else:
-            counter += find_occurrences(value, element)
+        counter += find_occurrences(value, element)
     return counter
