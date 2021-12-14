@@ -59,3 +59,91 @@ reading the first record, then go to the next one, until records are exhausted.
 When writing tests, it's not always neccessary to mock database calls
 completely. Use supplied example.sqlite file as database fixture file
 """
+import sqlite3
+from typing import Tuple
+
+
+class TableData:
+    """
+    Class initializes with database name and table as collection object
+    (implements Collection protocol).
+    """
+
+    def __init__(self, database_name: str, table_name: str):
+        """
+        Method to initialize the object’s attributes
+        :param database_name: string, database file
+        :param table_name: string, table name
+        """
+        self.table_name = table_name
+        self._conn = sqlite3.connect(database_name)
+        self._conn.row_factory = sqlite3.Row
+        self._cursor = self._conn.cursor()
+
+    def __enter__(self):
+        """
+        Method make a database connection
+        """
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """
+        Method take sure the database connection gets closed.
+        :param exc_type: indicates class of exception.
+        :param exc_val: indicates type of exception .
+        :param exc_tb: traceback is a report which has all of the information
+        needed to solve the exception.
+        """
+        self._conn.cursor().close()
+        self._conn.close()
+
+    def __len__(self) -> int:
+        """
+        Method returns the length, the number of rows in a table.
+        :return: int, the number of rows in a table
+        """
+        return self._conn.execute(
+            f"SELECT COUNT(*) FROM {self.table_name}"
+        ).fetchone()[0]
+
+    def __getitem__(self, item) -> Tuple:
+        """
+        Method returns a single row from the table of a specific name
+        :param item: str, key whose value should be returned
+        :return: tuple, returns a single row from the table of a specific name
+        """
+        self._cursor.execute(
+            f"SELECT * FROM {self.table_name} where name ='{item}'"
+        )
+        return tuple(self._cursor.fetchone())
+
+    def __contains__(self, item) -> bool:
+        """
+        Method checks that table contains a specified name
+        :param item: str, value whose should be checked
+        :return: True if an entry with a specified name is present in table,
+        otherwise False
+        """
+        self._cursor.execute(
+            f"SELECT * FROM {self.table_name} where name ='{item}'"
+        )
+        return self._cursor.fetchone()
+
+    def __iter__(self) -> Tuple:
+        """
+        Initializes an iterator protocol for the table.
+        :return: tuple, contain rows of the table
+        """
+        yield from self._cursor.execute(f"SELECT * from {self.table_name}")
+
+
+if __name__ == "__main__":
+    with TableData(
+        database_name="example.sqlite", table_name="presidents"
+    ) as presidents:
+        print(len(presidents))
+        for president in presidents:
+            print(president["country"])
+        # print(presidents["Yeltsin"])
+        # print("Yeltsin" in presidents)
+        # print("Obama" in presidents)
