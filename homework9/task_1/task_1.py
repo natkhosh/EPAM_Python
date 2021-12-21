@@ -22,6 +22,10 @@ def gen_from_file(file: str) -> Iterator:
     :param file: string, path to file
     :return: generator of integers
     """
+
+    if not Path(file).is_file():
+        raise FileNotFoundError(f"File {file} not found")
+
     with open(file, "r", encoding='utf-8') as fi:
         yield from [int(line) for line in fi]
 
@@ -39,4 +43,4 @@ def merge_sorted_files(file_list: List[Union[Path, str]]) -> Iterator:
 
 if __name__ == "__main__":
 
-    print(list(merge_sorted_files(['file1.txt', 'file2.txt', 'file3.txt'])))
+    print(list(merge_sorted_files(['file2.txt', 'file3.txt'])))
