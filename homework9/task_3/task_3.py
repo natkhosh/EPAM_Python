@@ -15,12 +15,11 @@ from typing import Callable, Optional, Union
 
 def universal_file_counter(
         dir_path: Union[str, Path], file_extension: str,
-        tokenizer: Optional[Callable] = None
-) -> int:
+        tokenizer: Optional[Callable] = None) -> int:
     """
-    This function count lines in all files with that extension
-    if there are no tokenizer.
-    If a the tokenizer is not none, it will count tokens.
+    This function counts lines in all files with file extension and an optional
+    tokenizer, if there is no tokenizer. And if the tokenizer, it will count
+    tokens.
     :param dir_path: path to directory
     :param file_extension: extension of files
     :param tokenizer: string method
