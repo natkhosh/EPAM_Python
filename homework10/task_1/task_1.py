@@ -39,6 +39,7 @@ import json
 import re
 from collections import defaultdict
 from heapq import nlargest, nsmallest
+from typing import Any
 
 import aiohttp
 import requests
@@ -48,7 +49,11 @@ URL = "https://markets.businessinsider.com/index/components/s&p_500"
 COMPANY_INFO = defaultdict(dict)
 
 
-def current_usd_rate():
+def current_usd_rate() -> float:
+    """
+    Function gets current USD rate.
+    :return: float: USD rate
+    """
     data = datetime.datetime.now()
     url = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=" \
           + data.strftime('%d/%m/%Y')
@@ -59,7 +64,12 @@ def current_usd_rate():
                  value.text.replace(",", "."))
 
 
-def get_last_page(url):
+def get_last_page(url) -> int:
+    """
+    Function gets the last page of paginator.
+    :param url: link to site for parsing
+    :return: int: number of pages from site
+    """
     req = requests.get(url)
     soup = BeautifulSoup(req.text, 'html.parser')
     num_pages = soup.find('div', class_="finando_paging margin-top--small").\
@@ -71,7 +81,7 @@ async def async_workers():
     last_page = get_last_page(URL)
     tasks = []
     async with aiohttp.ClientSession() as session:
-        for i in range(1, last_page):
+        for i in range(1, last_page+1):
             async with session.get(f"https://markets.businessinsider.com/"
                                    f"index/components/s&p_500?p={i}")\
                     as response:
@@ -125,7 +135,13 @@ async def get_additional_info():
         await asyncio.gather(*tasks)
 
 
-async def get_pe_ratio(soup, company_url):
+async def get_pe_ratio(soup: BeautifulSoup, company_url: str) -> None:
+    """
+    Function finds P/E value of company.
+    :param soup: response in html format
+    :param company_url: link to the company page
+    :return: None
+    """
     try:
         pe_value = float(soup.find("div", string="P/E Ratio").parent
                          .find(text=True).strip().replace(',', ''))
@@ -136,7 +152,13 @@ async def get_pe_ratio(soup, company_url):
     await asyncio.sleep(0.001)
 
 
-async def get_potential_profit(soup, company_url):
+async def get_potential_profit(soup: BeautifulSoup, company_url: str) -> None:
+    """
+    Function finds 52 weeks lowest and highest value of company.
+    :param soup: response in html format
+    :param company_url: link to the company page
+    :return: None
+    """
     week_high_element = soup.find(
         class_="snapshot__header", text="52 Week High")
     week_low_element = soup.find(
@@ -157,12 +179,18 @@ async def get_potential_profit(soup, company_url):
     await asyncio.sleep(0.001)
 
 
-def save_to_json(filename, value_name, data):
+def save_to_json(filename: str, value_name: str, data: Any) -> None:
+    """
+    Saving information to JSON file
+    :param filename: name of file
+    :param value_name: name of value
+    :param data: recorded data
+    """
     with open(filename + ".json", "w") as file:
         top_10 = [
             {
-                "name": data[i]["name"],
                 "code": data[i]["code"],
+                "name": data[i]["name"],
                 f"{value_name}": data[i][value_name],
             }
             for i in range(10)
@@ -170,7 +198,14 @@ def save_to_json(filename, value_name, data):
         json.dump(top_10, file, indent=4)
 
 
-def top_10_companies():
+def top_10_companies() -> None:
+    """
+    Top 10 companies:
+    - top 10 companies by highest price
+    - top 10 companies by biggest growth
+    - top 10 companies by lowest P/E
+    - top 10 companies by highest profit
+    """
     save_to_json("price", "price", nlargest(10,
                                             COMPANY_INFO.values(),
                                             key=lambda x: x["price"]))

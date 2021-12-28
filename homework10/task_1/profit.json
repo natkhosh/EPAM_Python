@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Merck",
+        "code": "MRK",
+        "potential profit": 5.97
+    },
+    {
+        "name": "Moderna",
+        "code": "MRNA",
+        "potential profit": 4.84
+    },
+    {
+        "name": "Discovery Communication a",
+        "code": "DISCA",
+        "potential profit": 3.61
+    },
+    {
+        "name": "ViacomCBS",
+        "code": "VIAC",
+        "potential profit": 3.6
+    },
+    {
+        "name": "Penn National Gaming",
+        "code": "PENN",
+        "potential profit": 3.27
+    },
+    {
+        "name": "Discovery Communications",
+        "code": "DISCK",
+        "potential profit": 3.2
+    },
+    {
+        "name": "Devon Energy",
+        "code": "DVN",
+        "potential profit": 3.02
+    },
+    {
+        "name": "NVIDIA",
+        "code": "NVDA",
+        "potential profit": 2.99
+    },
+    {
+        "name": "Marathon Oil",
+        "code": "MRO",
+        "potential profit": 2.7
+    },
+    {
+        "name": "Fortinet",
+        "code": "FTNT",
+        "potential profit": 2.69
+    }
+]

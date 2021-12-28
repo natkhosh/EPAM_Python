@@ -180,7 +180,8 @@ class Teacher(Person):
         solutions. If no argument is given, method reset all results.
         :param homework: an instance of the Homework class (default None)
         """
-        cls.homework_done.pop(homework) if homework else cls.homework_done.clear()
+        cls.homework_done.pop(homework) if homework \
+            else cls.homework_done.clear()
 
 
 if __name__ == '__main__':

@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Devon Energy",
+        "code": "DVN",
+        "growth": 169.81
+    },
+    {
+        "name": "Bath & Body Works",
+        "code": "BBWI",
+        "growth": 144.13
+    },
+    {
+        "name": "Marathon Oil",
+        "code": "MRO",
+        "growth": 135.36
+    },
+    {
+        "name": "Fortinet",
+        "code": "FTNT",
+        "growth": 131.74
+    },
+    {
+        "name": "NVIDIA",
+        "code": "NVDA",
+        "growth": 125.99
+    },
+    {
+        "name": "Ford Motor",
+        "code": "F",
+        "growth": 124.15
+    },
+    {
+        "name": "Diamondback Energy",
+        "code": "FANG",
+        "growth": 121.11
+    },
+    {
+        "name": "Nucor",
+        "code": "NUE",
+        "growth": 116.15
+    },
+    {
+        "name": "Gartner",
+        "code": "IT",
+        "growth": 106.62
+    },
+    {
+        "name": "CF Industries Holdings",
+        "code": "CF",
+        "growth": 95.13
+    }
+]
