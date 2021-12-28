@@ -68,9 +68,10 @@ def get_last_page(url):
 
 
 async def async_workers():
+    last_page = get_last_page(URL)
     tasks = []
     async with aiohttp.ClientSession() as session:
-        for i in range(1, 11):
+        for i in range(1, last_page):
             async with session.get(f"https://markets.businessinsider.com/"
                                    f"index/components/s&p_500?p={i}")\
                     as response:
