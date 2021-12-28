@@ -2,7 +2,7 @@
 Homework
 Ваша задача спарсить информацию о компаниях, находящихся в индексе S&P 500
 с данного сайта:
-# https://markets.businessinsider.com/index/components/s&p_500
+https://markets.businessinsider.com/index/components/s&p_500
 
 Для каждой компании собрать следующую информацию:
 
@@ -33,14 +33,14 @@ P/E компании (информация находится справа от 
 For scrapping you cans use beautifulsoup4
 For requesting aiohttp
 """
-import asyncio
+# import asyncio
 import datetime
 import json
 import re
 from collections import defaultdict
 from heapq import nlargest, nsmallest
 
-import aiohttp
+# import aiohttp
 import requests
 from bs4 import BeautifulSoup
 
@@ -60,6 +60,7 @@ def current_usd_rate():
 
 
 def get_last_page(url):
+    # url = "https://markets.businessinsider.com/index/components/s&p_500"
     req = requests.get(url)
     soup = BeautifulSoup(req.text, 'html.parser')
     num_pages = soup.find('div', class_="finando_paging margin-top--small").\
@@ -67,93 +68,67 @@ def get_last_page(url):
     return int(num_pages[-2].text)
 
 
-async def async_workers():
-    tasks = []
-    async with aiohttp.ClientSession() as session:
-        for i in range(1, 11):
-            async with session.get(f"https://markets.businessinsider.com/"
-                                   f"index/components/s&p_500?p={i}")\
-                    as response:
-                html = await response.text()
-                soup = BeautifulSoup(html, "html.parser")
-
-                tasks.append(asyncio.create_task(company_list(soup)))
-        await asyncio.gather(*tasks)
-
-
-async def company_list(soup):
-    tasks = []
-    table_body = soup.find("tbody", class_="table__tbody")
-    table_rows = table_body.find_all("tr")
-
-    for row in table_rows:
-        tasks.append(asyncio.create_task(tables_scan(row)))
-    await asyncio.gather(*tasks)
-
-
-async def tables_scan(row):
+def company_list():
     rub = current_usd_rate()
-    href = row.find("a")["href"]
-    company_url = "https://markets.businessinsider.com" + href
-    code = re.split(r"/", href)[-1].split("-")[0].upper()
-    name = row.find("a").text.strip()
-    growth = float(row.find_all("td")[-1].find_all("span")[-1].
-                   text[:-1])
-    price = float(row.find_all("td")[1].text.split()[0].
-                  strip().replace(',', '')) * rub
+    for i in range(1, 11):
+        url = f"https://markets.businessinsider.com/index/" \
+              f"components/s&p_500?p={i}"
+        res = requests.get(url)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        table_body = soup.find("tbody", class_="table__tbody")
+        table_rows = table_body.find_all("tr")
+        # print(table_rows)
 
-    COMPANY_INFO[company_url]["code"] = code
-    COMPANY_INFO[company_url]["name"] = name
-    COMPANY_INFO[company_url]["growth"] = growth
-    COMPANY_INFO[company_url]["price"] = price
-    await asyncio.sleep(0.1)
+        for row in table_rows:
+            href = row.find("a")["href"]
+            company_url = "https://markets.businessinsider.com" + href
+            code = re.split(r"/", href)[-1].split("-")[0].upper()
+            name = row.find("a").text.strip()
+            growth = float(row.find_all("td")[-1].find_all("span")[-1].
+                           text[:-1])
+            price = float(row.find_all("td")[1].text.split()[0].
+                          strip().replace(',', '')) * rub
 
-
-async def get_additional_info():
-    tasks = []
-    async with aiohttp.ClientSession() as session:
-        for company_url in COMPANY_INFO.keys():
-            async with session.get(company_url) as response:
-                html = await response.text()
-                soup = BeautifulSoup(html, "html.parser")
-
-                tasks.append(asyncio.create_task(
-                    get_pe_ratio(soup, company_url)))
-                tasks.append(asyncio.create_task(
-                    get_potential_profit(soup, company_url)))
-        await asyncio.gather(*tasks)
+            COMPANY_INFO[company_url]["code"] = code
+            COMPANY_INFO[company_url]["name"] = name
+            COMPANY_INFO[company_url]["growth"] = growth
+            COMPANY_INFO[company_url]["price"] = price
 
 
-async def get_pe_ratio(soup, company_url):
-    try:
-        pe_value = float(soup.find("div", string="P/E Ratio").parent
-                         .find(text=True).strip().replace(',', ''))
-    except AttributeError:
-        pe_value = 0
+def get_pe_ratio():
+    for company_url in COMPANY_INFO.keys():
+        res = requests.get(company_url)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        try:
+            pe_value = float(soup.find("div", string="P/E Ratio").parent
+                             .find(text=True).strip().replace(',', ''))
+        except AttributeError:
+            pe_value = 0
 
-    COMPANY_INFO[company_url]["P/E"] = pe_value
-    await asyncio.sleep(0.001)
+        COMPANY_INFO[company_url]["P/E"] = pe_value
 
 
-async def get_potential_profit(soup, company_url):
-    week_high_element = soup.find(
-        class_="snapshot__header", text="52 Week High")
-    week_low_element = soup.find(
-        class_="snapshot__header", text="52 Week Low")
-    if week_low_element is None and week_high_element is None:
-        profit = 0
-    else:
-        week_high_value = week_high_element.findParent().text.split()[0]
-        week_high = float(week_high_value.replace(",", ""))
+def get_potential_profit():
+    for company_url in COMPANY_INFO.keys():
+        res = requests.get(company_url)
+        soup = BeautifulSoup(res.text, 'html.parser')
 
-        week_low_value = week_low_element.findParent().text.split()[0]
-        week_low = float(week_low_value.replace(",", ""))
-        potential_profit = week_high / week_low
+        week_high_element = soup.find(
+            class_="snapshot__header", text="52 Week High")
+        week_low_element = soup.find(
+            class_="snapshot__header", text="52 Week Low")
+        if week_low_element is None and week_high_element is None:
+            profit = 0
+        else:
+            week_high_value = week_high_element.findParent().text.split()[0]
+            week_high = float(week_high_value.replace(",", ""))
 
-        profit = round(potential_profit, 2)
+            week_low_value = week_low_element.findParent().text.split()[0]
+            week_low = float(week_low_value.replace(",", ""))
+            potential_profit = week_high / week_low
 
-    COMPANY_INFO[company_url]["potential profit"] = profit
-    await asyncio.sleep(0.001)
+            profit = round(potential_profit, 2)
+        COMPANY_INFO[company_url]["potential profit"] = profit
 
 
 def save_to_json(filename, value_name, data):
@@ -185,11 +160,24 @@ def top_10_companies():
                           key=lambda x: x["potential profit"]))
 
 
+def get_stocks_on_page():
+    req = requests.get(URL)
+    soup = BeautifulSoup(req.text, 'html.parser')
+
+    return soup.find_all("a", href=re.compile(r"-stock$"))
+
+
 if __name__ == "__main__":
     start = datetime.datetime.now()
-    event_loop = asyncio.get_event_loop()
-    event_loop.run_until_complete(async_workers())
-    event_loop.run_until_complete(get_additional_info())
-
-    print(datetime.datetime.now() - start)
+    company_list()
+    get_pe_ratio()
+    get_potential_profit()
+    # print(COMPANY_INFO)
     top_10_companies()
+    # print(get_stocks_on_page())
+    print(datetime.datetime.now() - start)
+
+
+    # for row in get_stocks_on_page():
+    #     # href = row.find("a")["href"]
+    #     print(row)
