@@ -24,5 +24,18 @@ assert SizesEnum.XL == "XL"
 
 
 class SimplifiedEnum(type):
+    """
+    Simplified version of Enum class without duplications in variables
+    declarations.
+    """
     def __new__(cls, name, bases, attrs):
-        pass
+        """
+        Creates a new class with given name, bases and attributes.
+        :param name: of new class
+        :param bases: ancestor class or classes, could be empty
+        :param attrs: name space of new class
+        """
+        key = f"_{name}__keys"
+        attrs = {key: key for key in attrs[key]}
+
+        return super().__new__(cls, name, bases, attrs)
