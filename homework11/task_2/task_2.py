@@ -19,3 +19,55 @@ assert order_1.final_price() == 75
 order_2 = Order(100, elder_discount)
 assert order_2.final_price() == 10
 """
+from typing import Callable, Union
+
+
+class Order:
+    """
+    Describe an order which contain, price and optional discount program.
+    """
+
+    def __init__(self, price: int,
+                 discount_program: Union[Callable, None] = None):
+        """
+        Initialised class instance.
+        :param price: order price
+        :param discount_program: discount program
+        """
+        self.price = price
+        self.discount_program = discount_program
+
+    def final_price(self):
+        """
+        Final price from given price of order and discount program.
+        :return: total order price
+        """
+        if self.discount_program:
+            return self.discount_program(self.price)
+
+        return self.price
+
+
+def morning_discount(price: float) -> float:
+    """
+    Function calculate the price with discount 25%.
+    :param price:
+    :return: price calculation
+    """
+    return price - price * 0.25
+
+
+def elder_discount(price: float) -> float:
+    """
+        Function calculate the price with discount 10%.
+        :param price:
+        :return: price calculation
+        """
+    return price - price * 0.9
+
+
+if __name__ == "__main__":
+    order_1 = Order(100, morning_discount)
+    assert order_1.final_price() == 75
+    order_2 = Order(100, elder_discount)
+    assert order_2.final_price() == 10
