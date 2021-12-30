@@ -27,7 +27,7 @@ class Order:
     Describe an order which contain, price and optional discount program.
     """
 
-    def __init__(self, price: int,
+    def __init__(self, price: Union[float, int],
                  discount_program: Union[Callable, None] = None):
         """
         Initialised class instance.
@@ -48,7 +48,7 @@ class Order:
         return self.price
 
 
-def morning_discount(price: float) -> float:
+def morning_discount(price: Union[float, int]) -> float:
     """
     Function calculate the price with discount 25%.
     :param price:
@@ -57,7 +57,7 @@ def morning_discount(price: float) -> float:
     return price - price * 0.25
 
 
-def elder_discount(price: float) -> float:
+def elder_discount(price: Union[float, int]) -> float:
     """
         Function calculate the price with discount 10%.
         :param price:
