@@ -98,11 +98,11 @@ async def async_workers():
         await asyncio.gather(*tasks)
 
 
-async def company_list(soup):
+async def company_list(soup: BeautifulSoup):
     """
-
-    :param soup:
-    :return:
+    Function creates async tasks for pages parsing
+    :param soup: response from site in html format
+    :return: None
     """
     tasks = []
     table_body = soup.find("tbody", class_="table__tbody")
