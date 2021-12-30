@@ -23,7 +23,7 @@ class Supressor:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        return True if self.exception is exc_type else False
+        return self.exception is exc_type
 
 
 @contextmanager
