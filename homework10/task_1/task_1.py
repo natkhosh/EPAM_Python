@@ -49,7 +49,7 @@ URL = "https://markets.businessinsider.com/index/components/s&p_500"
 COMPANY_INFO = defaultdict(dict)
 
 
-def current_usd_rate() -> float:
+async def current_usd_rate() -> float:
     """
     Function gets current USD rate.
     :return: float: USD rate
@@ -60,11 +60,12 @@ def current_usd_rate() -> float:
 
     req = requests.get(url)
     soup = BeautifulSoup(req.text, "lxml")
-    return float(soup.find("valute", attrs={"id": "R01235"}).
-                 value.text.replace(",", "."))
+    await asyncio.sleep(0.1)
+    return float(soup.find("valute", attrs={"id": "R01235"})
+                 .value.text.replace(",", "."))
 
 
-def get_last_page(url) -> int:
+async def get_last_page(url) -> int:
     """
     Function gets the last page of paginator.
     :param url: link to site for parsing
@@ -74,14 +75,19 @@ def get_last_page(url) -> int:
     soup = BeautifulSoup(req.text, 'html.parser')
     num_pages = soup.find('div', class_="finando_paging margin-top--small").\
         find_all("a")
+    await asyncio.sleep(0.1)
     return int(num_pages[-2].text)
 
 
 async def async_workers():
-    last_page = get_last_page(URL)
+    """
+     Function creates connection and creates soup object
+    :return: None
+    """
     tasks = []
     async with aiohttp.ClientSession() as session:
-        for i in range(1, last_page+1):
+        last_page = await get_last_page(URL)
+        for i in range(1, int(last_page)+1):
             async with session.get(f"https://markets.businessinsider.com/"
                                    f"index/components/s&p_500?p={i}")\
                     as response:
@@ -93,6 +99,11 @@ async def async_workers():
 
 
 async def company_list(soup):
+    """
+
+    :param soup:
+    :return:
+    """
     tasks = []
     table_body = soup.find("tbody", class_="table__tbody")
     table_rows = table_body.find_all("tr")
@@ -102,8 +113,19 @@ async def company_list(soup):
     await asyncio.gather(*tasks)
 
 
-async def tables_scan(row):
-    rub = current_usd_rate()
+async def tables_scan(row: BeautifulSoup):
+    """
+    Function collects information of all companies from table pages into
+    dictionary:
+    - company url
+    - company name
+    - company code
+    - price
+    - growth
+    :param row: Tag object corresponds to an HTML tag in table pages
+    :return: None
+    """
+    rub = await current_usd_rate()
     href = row.find("a")["href"]
     company_url = "https://markets.businessinsider.com" + href
     code = re.split(r"/", href)[-1].split("-")[0].upper()
@@ -121,6 +143,12 @@ async def tables_scan(row):
 
 
 async def get_additional_info():
+    """
+    Function finds additional information about companies:
+    - profit
+    - P/ETakes url of details page and returns code, P\\E and potential profit
+    :return: None
+    """
     tasks = []
     async with aiohttp.ClientSession() as session:
         for company_url in COMPANY_INFO.keys():

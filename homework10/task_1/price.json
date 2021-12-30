@@ -1,52 +1,52 @@
 [
     {
-        "name": "NVR",
         "code": "NVR",
-        "price": 430817.433436
+        "name": "NVR",
+        "price": 439000.642728
     },
     {
-        "name": "Amazon",
         "code": "AMZN",
-        "price": 249909.46823700002
+        "name": "Amazon",
+        "price": 249669.407832
     },
     {
-        "name": "Alphabet A",
         "code": "GOOGL",
-        "price": 214631.715649
+        "name": "Alphabet A",
+        "price": 216568.99564399998
     },
     {
-        "name": "Alphabet C",
         "code": "GOOG",
-        "price": 214226.73771200003
+        "name": "Alphabet C",
+        "price": 216445.99780599997
     },
     {
-        "name": "Booking Holdings",
         "code": "BKNG",
-        "price": 175046.403883
+        "name": "Booking Holdings",
+        "price": 175653.43340199997
     },
     {
-        "name": "AutoZone",
         "code": "AZO",
-        "price": 150336.89109400002
+        "name": "AutoZone",
+        "price": 155091.43555
     },
     {
-        "name": "Chipotle Mexican Grill",
         "code": "CMG",
-        "price": 128377.2737
+        "name": "Chipotle Mexican Grill",
+        "price": 128881.111832
     },
     {
-        "name": "Mettler-Toledo International",
         "code": "MTD",
-        "price": 122216.189823
+        "name": "Mettler-Toledo International",
+        "price": 125576.37351399999
     },
     {
-        "name": "Tesla",
         "code": "TSLA",
-        "price": 79676.66287100001
+        "name": "Tesla",
+        "price": 79698.17993999999
     },
     {
-        "name": "BlackRock",
         "code": "BLK",
-        "price": 67594.699029
+        "name": "BlackRock",
+        "price": 67251.09333999999
     }
 ]

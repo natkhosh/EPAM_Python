@@ -1,52 +1,52 @@
 [
     {
-        "name": "Devon Energy",
         "code": "DVN",
-        "growth": 169.81
+        "name": "Devon Energy",
+        "growth": 190.55
     },
     {
-        "name": "Bath & Body Works",
+        "code": "MRO",
+        "name": "Marathon Oil",
+        "growth": 149.96
+    },
+    {
+        "code": "FTNT",
+        "name": "Fortinet",
+        "growth": 146.28
+    },
+    {
         "code": "BBWI",
+        "name": "Bath & Body Works",
         "growth": 144.13
     },
     {
-        "name": "Marathon Oil",
-        "code": "MRO",
-        "growth": 135.36
-    },
-    {
-        "name": "Fortinet",
-        "code": "FTNT",
-        "growth": 131.74
-    },
-    {
-        "name": "NVIDIA",
         "code": "NVDA",
-        "growth": 125.99
+        "name": "NVIDIA",
+        "growth": 139.88
     },
     {
-        "name": "Ford Motor",
         "code": "F",
-        "growth": 124.15
+        "name": "Ford Motor",
+        "growth": 134.21
     },
     {
-        "name": "Diamondback Energy",
         "code": "FANG",
-        "growth": 121.11
+        "name": "Diamondback Energy",
+        "growth": 133.34
     },
     {
-        "name": "Nucor",
         "code": "NUE",
-        "growth": 116.15
+        "name": "Nucor",
+        "growth": 123.79
     },
     {
-        "name": "Gartner",
+        "code": "MRNA",
+        "name": "Moderna",
+        "growth": 121.62
+    },
+    {
         "code": "IT",
-        "growth": 106.62
-    },
-    {
-        "name": "CF Industries Holdings",
-        "code": "CF",
-        "growth": 95.13
+        "name": "Gartner",
+        "growth": 110.79
     }
 ]
