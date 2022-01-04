@@ -12,8 +12,9 @@ Utilizing that framework capabilities, create:
     retrieves and stores the following information into CSV file report.csv
 
         for all done (completed) homeworks:
-            Student name (who completed homework) Creation date Teacher name
-            who created homework
+            Student name (who completed homework)
+            Creation date
+            Teacher name who created homework
 
 Utilize ORM capabilities as much as possible, avoiding executing raw SQL
 queries.
@@ -29,19 +30,29 @@ Base = declarative_base()
 
 
 class Homework(Base):
+    """
+    Class describes the data structure of the table that will store the
+    records for homework.
+    """
     __tablename__ = 'homeworks'
     id = Column(Integer, primary_key=True)
     text = Column(String(100), nullable=False)
     deadline = Column(Integer, nullable=False)
     created = Column(DateTime(), default=datetime.now)
+    author = Column(Integer, ForeignKey("teachers.id"))
 
     def __str__(self) -> str:
         return self.text
 
 
 class HomeworkResult(Base):
+    """
+    Class describes the data structure of the table that will store the
+    records for homeworkresult.
+    """
     __tablename__ = 'homeworkresults'
-    homework = Column(None, ForeignKey('homeworks.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    homework = Column(None, ForeignKey('homeworks.id'))
     solution = Column(String(100), nullable=False)
     author = Column(None, ForeignKey('students.id'))
     created = Column(DateTime(), default=datetime.now)
@@ -51,6 +62,10 @@ class HomeworkResult(Base):
 
 
 class Student(Base):
+    """
+    Class describes the data structure of the table that will store the
+    records for Student.
+    """
     __tablename__ = 'students'
     id = Column(Integer, primary_key=True)
     first_name = Column(String(50), nullable=False)
@@ -59,12 +74,12 @@ class Student(Base):
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
-    # def __repr__(self):
-    #     return "<Student(first_name='%s', last_name='%s', id='%s')>" % (
-    #         self.first_name, self.last_name, self.id)
-
 
 class Teacher(Base):
+    """
+    Class describes the data structure of the table that will store the
+    records for Teacher.
+    """
     __tablename__ = 'teachers'
     id = Column(Integer, primary_key=True)
     first_name = Column(String(50), nullable=False)
@@ -75,6 +90,10 @@ class Teacher(Base):
 
 
 def main():
+    """
+    Function creates a connection with database ant CREATE statements for all
+    tables.
+    """
     engine = create_engine(DATABASE, echo=True)
     Base.metadata.create_all(engine)
 

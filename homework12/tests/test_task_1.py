@@ -5,8 +5,7 @@ DATABASE = 'sqlite:///../task_1/main.db'
 
 
 def test_database_structure():
-    """Testing that all created records exist in test db"""
-
+    """Testing that all created records exist in database"""
     with session_scope(DATABASE) as session:
 
         student = session.query(Student).all()
@@ -17,6 +16,7 @@ def test_database_structure():
 
 
 def test_recording_student():
+    """Testing that new record created and exist in database"""
     with session_scope(DATABASE) as session:
         student = Student(first_name='Natalia', last_name='Khoshina')
         session.add(student)

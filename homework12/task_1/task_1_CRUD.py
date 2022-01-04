@@ -10,8 +10,14 @@ DATABASE = 'sqlite:///main.db'
 
 
 @contextmanager
-def session_scope(database):
-    """Provide a transactional scope around a series of operations."""
+def session_scope(database: str) -> Session:
+    """
+    Function provides a transactional scope around a series of operations:
+    - database connection
+    - session manipulations
+    :param database: database path
+    :return: session
+    """
 
     engine = create_engine(database, echo=True)
     session = Session(bind=engine)
@@ -29,13 +35,16 @@ def session_scope(database):
 
 
 def main():
+    """
+    Function updates database with class instances.
+    """
     objects = [
         Student(first_name='Roman', last_name='Petrov'),
         Student(first_name='Lev', last_name='Sokolov'),
         Teacher(first_name='Daniil', last_name='Shadrin'),
         Teacher(first_name='Aleksandr', last_name='Smetanin'),
-        Homework(text='Learn OOP', deadline=1),
-        Homework(text='Read docs', deadline=5),
+        Homework(text='Learn OOP', deadline=1, author=1),
+        Homework(text='Read docs', deadline=5, author=1),
         HomeworkResult(homework=1, solution='I have done this hw', author=1),
         HomeworkResult(homework=2, solution='I have done this hw too',
                        author=2)
@@ -46,8 +55,4 @@ def main():
 
 
 if __name__ == "__main__":
-    # main()
-
-    with session_scope(DATABASE) as session:
-        s = session.query(Student).first()
-        print(s)
+    main()
