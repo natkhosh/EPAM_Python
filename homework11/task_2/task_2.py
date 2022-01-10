@@ -63,7 +63,7 @@ def elder_discount(price: Union[float, int]) -> float:
         :param price:
         :return: price calculation
         """
-    return price - price * 0.9
+    return price * 0.1
 
 
 if __name__ == "__main__":
